@@ -1,0 +1,10 @@
+{
+	"name": "kdtl",
+	"description": "KAI D Template Library",
+	"copyright": "Copyright © 2015, alphakai",
+	"authors": ["alphakai"],
+  "license":"MIT",
+  "target":"none",
+	"dependencies": {
+	}
+}
