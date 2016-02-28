@@ -4,13 +4,14 @@ import std.algorithm,
        std.range,
        std.traits;
 
-template curry(alias func){
+template curry(alias func) {
   alias argsintuple = ParameterTypeTuple!func;
 
   immutable lambdaStr = (lamArgs =>
-    (temp){
-      foreach(i, e; argsintuple)
+    (temp) {
+      foreach(i, e; argsintuple) {
         temp ~= "(" ~ e.stringof ~ " " ~ lamArgs[i] ~ ") => ";
+      }
 
       return temp ~ "func(" ~ lamArgs.join(", ") ~ ")";
     }("")

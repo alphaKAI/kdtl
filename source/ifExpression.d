@@ -2,30 +2,30 @@ module kdtl.ifExpression;
 
 import std.traits;
 // ifExpression for D language
-template IF(alias condition){
+template IF(alias condition) {
   //IF!(condition) -> Return : bool
-  auto IF(){
+  auto IF() {
     return condition;
   }
 
-  auto IF(T, F)(T trueExpression, F falseExpression){
+  auto IF(T, F)(T trueExpression, F falseExpression) {
     //IF!(condition)(T V1 : T V2) -> Return : V1 or V2
-    static if(!isFunctionPointer!T && !isFunctionPointer!F)
+    static if (!isFunctionPointer!T && !isFunctionPointer!F) {
       return condition ? trueExpression : falseExpression;
     //IF!(condition)(() => T lambdaV1, T V2) -> Return : lambdaV1 or V2
-    else static if(isFunctionPointer!T && !isFunctionPointer!F)
+    } else static if (isFunctionPointer!T && !isFunctionPointer!F) {
       return condition ? trueExpression() : falseExpression;
     //IF!(condition)(T V1, () => T lambdaV2) -> Return : V1 or lambdaV2
-    else static if(!isFunctionPointer!T && isFunctionPointer!F)
+    } else static if (!isFunctionPointer!T && isFunctionPointer!F) {
       return condition ? trueExpression : falseExpression();
     //IF!(condition)(T lambdaV1, () => T lambdaV2) -> Return : lambdaV1 or lambdaV2
-    else static if(isFunctionPointer!T && isFunctionPointer!F){
+    } else static if (isFunctionPointer!T && isFunctionPointer!F) {
       return condition ? trueExpression() : falseExpression();
     }
   }
 }
 
-unittest{
+unittest {
   assert(true == IF!(1 > 0));
   assert(false == IF!(1 < 0));
 
