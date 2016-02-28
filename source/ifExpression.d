@@ -26,8 +26,6 @@ template IF(alias condition){
 }
 
 unittest{
-  import std.stdio;
-
   assert(true == IF!(1 > 0));
   assert(false == IF!(1 < 0));
 
